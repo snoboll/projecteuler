@@ -14,11 +14,10 @@ for n in range(len(a)):
 		add = ord(name[i]) - 64
 		print("adding", add)
 		nameval += add
-	
-	
-	print(nameval, "with factor:", n+1)	
+
+	print(nameval, "with factor:", n+1)
 	print("total name value", nameval*(n+1))
 	ans += nameval*(n+1)
 	print("current ans", ans)
-	
+
 print(ans)
