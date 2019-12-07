@@ -1,18 +1,12 @@
 #Euler23
 import time
 start_time = time.time()
-cap = 100
 
 #checking abundant numbers
 def isAbund(n):
     divs = set()
-    divsum = sum([div for div in range(1,n) if n%div == 0])
+    divsum = sum([div  for div in range(1,n) if n%div == 0])
     return(divsum>n)
-
-abund = []
-for i in range(cap):
-    if isAbund(i):
-        abund.append(i)
 
 #binary search
 def binsearch(list, item):
@@ -28,20 +22,30 @@ def binsearch(list, item):
                 hi = mid-1
             else:
                 lo = mid+1
-    return True
+    return found
 
+cap = 100
 
-#getting nums which cant be sum omf abund numbers
-testcap = 100
-for n in range(testcap):
-    for i in range(n):
-        a = abund[i]
-        for j in range(n):
-            if n == j+i:
-                validnr = False
-                break
-    if validnr:
-        sum+=n
+#getting list of abundant numbers
+abund = []
+for i in range(cap):
+    if isAbund(i):
+        abund.append(i)
+print("abund =", abund)
+#getting nums which cant be sum of abund numbers
+anslist = []
+for n in range(1, cap):
+    combofound = False
+    for a in abund:#a is first abund number
+        b = n-a
+        if binsearch(abund, b):
+            print(a, "+", b, "=", n)
+            combofound = True
+            break
 
-print(abund)
+    if not combofound:
+        anslist.append(n)
+
+print(anslist)
+print(sum(anslist))
 print("--- %s seconds ---" % (time.time()-start_time))
